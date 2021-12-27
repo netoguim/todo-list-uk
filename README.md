@@ -15,13 +15,14 @@
 
 # Rotas
 
- 
 
-1 - /todo - POST
-2 - /todos - GET
-3 - /todo/{id} - GET
-4 - /todo/{id} - PUT
-5 - /todo/{id} - DELETE
+ - 1 - /todo - POST
+ - 2 - /todos - GET
+ - 3 - /todo/{id} - GET
+ - 4 - /todo/{id} - PUT
+ - 5 - /todo/{id} - DELETE 
+
+
 
 ---
 
