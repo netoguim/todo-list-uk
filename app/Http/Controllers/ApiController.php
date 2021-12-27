@@ -59,14 +59,56 @@ class ApiController extends Controller
         return $array;
     }
 
-    public function updateTodo() {
+    public function updateTodo($id, Request $request) {
 
+        $array = ['error' => ''];
+
+        // Validando 
+        $rules = [
+            'title' => 'min:3',
+            'done' => 'boolean' // true, false, 1,0
+                ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            $array['error'] = $validator->messages();
+            return $array;
+        }
+
+        $title = $request->input('title');
+        $done = $request->input('done');
         
+
+
+        //atualizando o item
+        $todo = Todo::find($id);
+        if($todo) {
+
+            if($title) {
+                $todo->title = $title;
+            }
+            if($done !== NULL) {
+                $todo->done = $done;
+
+            }
+
+            $todo->save();
+
+        } else {
+            $array['error'] = 'Tarefa '.$id.' não existe, logo, não pode ser atualizada.';
+        }
+
+        return $array;
     }
 
-    public function deleteTodo() {
+    public function deleteTodo($id) {
+        $array = ['error' => ''];
 
-        
+        $todo = Todo::find($id);
+        $todo->delete();
+
+
+        return $array;
     }
 
 }
